@@ -12,7 +12,7 @@ class SentimentClient(lymph.Interface):
     @lymph.event('tweet.received')
     def on_tweet_received(self, event):
         tweet = json.loads(event.body)
-        print u'Tweet received: "{}"'.format(tweet['text'])
+        self._print_lines(u'Tweet received: {}'.format(tweet['text']))
 
     def on_start(self):
         super(SentimentClient, self).on_start()
@@ -20,13 +20,19 @@ class SentimentClient(lymph.Interface):
 
     def loop(self):
         while True:
-            print datetime.datetime.now()
-            print u'Tweet count: {}'.format(self.crunching.count())
-            print u'Avg sentiment: {}'.format(self.crunching.avg())
             last_tweet = self.crunching.recent(limit=1)[0]
-            print u'Last tweet: {}'.format(last_tweet['text'])
-            print 
-            gevent.sleep(2)
+            output = (
+                unicode(datetime.datetime.now()),
+                u'Tweet count: {}'.format(self.crunching.count()),
+                u'Avg sentiment: {}'.format(self.crunching.avg()),
+                u'Last tweet: "{}"'.format(last_tweet['text']),
+            )
+            self._print_lines(*output)
+            gevent.sleep(1)
+
+    def _print_lines(self, *lines):
+        lines += (u'-' * 32,)
+        print(u'\n'.join(lines))
 
     def on_stop(self, *args, **kwargs):
         self._loop.kill()
