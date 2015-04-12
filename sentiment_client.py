@@ -1,4 +1,5 @@
 import datetime
+import json
 
 import gevent
 import lymph
@@ -10,7 +11,8 @@ class SentimentClient(lymph.Interface):
 
     @lymph.event('tweet.received')
     def on_tweet_received(self, event):
-        print 'Tweet received: "{}"'.format(event.body)
+        tweet = json.loads(event.body)
+        print u'Tweet received: "{}"'.format(tweet['text'])
 
     def on_start(self):
         super(SentimentClient, self).on_start()
@@ -24,7 +26,7 @@ class SentimentClient(lymph.Interface):
             last_tweet = self.crunching.recent(limit=1)[0]
             print u'Last tweet: {}'.format(last_tweet['text'])
             print 
-            gevent.sleep(1)
+            gevent.sleep(2)
 
     def on_stop(self, *args, **kwargs):
         self._loop.kill()
