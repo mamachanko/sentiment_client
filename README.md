@@ -53,3 +53,6 @@ or find other services:
 ``` shell
 lymph discover
 ```
+
+# Lost?
+Ask for help :)
