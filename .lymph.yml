@@ -19,4 +19,4 @@ dependencies:
  
 instances:
     sentiment_client:
-        command: lymph instance --config=sentiment_client.yml --reload
+        command: lymph instance --config=sentiment_client.yml --reload -g

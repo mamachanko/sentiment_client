@@ -12,4 +12,4 @@ virtualenv venv
 pip install git+ssh://git@github.com/deliveryhero/lymph@master#egg=lymph 
 
 # run the service
-PYTHONPATH=. lymph node
+PYTHONPATH=. lymph node -g
