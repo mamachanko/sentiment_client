@@ -6,13 +6,15 @@ registry:
 event_system:
     class: lymph.events.kombu:KombuEventSystem
     transport: amqp
-    hostname: rabbitmq  # you may want to change me
+    # hostname: rabbitmq
+    hostname: 10.112.1.159  # you may want to change me
 
 
 dependencies:
     kazoo:
         class: kazoo.client:KazooClient
-        hosts: zk  # you may want to change me
+        # hosts: zk
+        hosts: 10.112.1.159  # you may want to change me
  
  
 instances:
