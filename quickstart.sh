@@ -6,6 +6,7 @@ cd sentiment_client
 
 # create a virtualenv and activate it
 virtualenv venv
+. source/venv/activate
 
 # install lymph
 pip install git+ssh://git@github.com/deliveryhero/lymph@master#egg=lymph 
